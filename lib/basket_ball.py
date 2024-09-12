@@ -182,3 +182,70 @@ def game_dict():
             ]
         }
     }
+
+##PRACTICE FUNCTION 
+def get_all_players():
+    home_players= game_dict()['home']['players']
+    away_players= game_dict()['away']['players']
+    print(f"{home_players}\n\n"f"{away_players}\n")
+
+# print(get_all_players())
+
+
+def num_points_per_game(name):
+    teams = game_dict()
+    for team in teams:    
+        for player in teams[team]["players"]:
+            if player["name"] == name:
+                return player["points_per_game"]
+
+
+def player_age(name): 
+    teams = game_dict()
+    for team in teams:    
+        for player in teams[team]["players"]:
+            if player["name"] == name:
+                return player["age"]
+
+def team_colors(team_name):
+    teams = game_dict()
+    for team in teams:    
+        if team_name == teams[team]["team_name"]:
+            return teams[team]["colors"]
+
+def team_names():
+    teams = game_dict() 
+    team_names = [teams[team]["team_name"] for team in teams]
+    return team_names
+
+def player_numbers(team_name): 
+    teams = game_dict()
+    for team in teams:
+        if teams[team]["team_name"] == team_name:
+            player_numbers = [player['number'] for player in teams[team]['players']]
+            return player_numbers
+
+def player_stats(name): 
+    teams = game_dict()
+    for team in teams:    
+        for player in teams[team]["players"]:
+            if player["name"] == name:
+                return player
+
+def average_rebounds_by_shoe_brand(): 
+    teams = game_dict() 
+    brand_list = {}
+    for team in teams:    
+        for player in teams[team]["players"]:
+            brand = player["shoe_brand"]
+            rebounds = player["rebounds_per_game"]
+            if brand in brand_list:
+                brand_list[brand].append(rebounds)
+            else:
+                brand_list[brand] = [rebounds]
+    for brand in brand_list:
+        brand_avg = round(sum(brand_list[brand]) / len(brand_list[brand]),2)
+        avg = format(brand_avg,'.2f')
+        print(f"{brand}: {avg}")
+        
+             
